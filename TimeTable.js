@@ -3,7 +3,10 @@ var end =document.getElementById("end");
 var endOptions =end.options;
 var colors =["bg-primary","bg-success","bg-danger","bg-warning","bg-info"];
 var colorIndex=0;
+(function(){
+	resize();
 
+})();
 
 // fix this later
 function resize(){
@@ -11,6 +14,7 @@ function resize(){
 	var timeTable = document.getElementById("timeTable");
 	var addCourseWidth= addCourse.offsetWidth;
 	var timeTableWidth = timeTable.offsetWidth;
+	//alert(addCourseWidth);
 
 	var min = 230;
 	var max = 300;
@@ -19,11 +23,16 @@ function resize(){
 		columnSize=2;
 	}
 	if(addCourseWidth<min){
+		while(addCourseWidth<min){
+
 		columnSize++;
-		
+		addCourse.className="col-"+(columnSize)+" bg-dark";
+		timeTable.className="col-"+(12-columnSize);
+		addCourseWidth= addCourse.offsetWidth;
+		}
 
 	}
-	else if(addCourseWidth>min && columnSize>=3){
+	else if(addCourseWidth>max && columnSize>=3){
 		columnSize--;
 	
 	}
