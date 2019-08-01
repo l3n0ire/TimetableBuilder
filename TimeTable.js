@@ -16,14 +16,14 @@ function resize(){
 	var timeTableWidth = timeTable.offsetWidth;
 	//alert(addCourseWidth);
 
-	var min = 230;
+	var min = 180;
 	var max = 300;
 	
 	if(columnSize<2){
 		columnSize=2;
 	}
 	if(addCourseWidth<min){
-		while(addCourseWidth<min){
+		while(addCourseWidth<min && columnSize<5){
 
 		columnSize++;
 		addCourse.className="col-"+(columnSize)+" bg-dark";
