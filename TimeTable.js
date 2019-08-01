@@ -85,7 +85,9 @@ function addCourse(){
 			colorIndex=0;
 
 	id=String(dayIndex)+String(startIndex);
-	document.getElementById(id).innerHTML = courseCode.value+"<br>"+location.value+"<br>"+startOptions[startIndex].value+" - "+endOptions[endIndex+1].value;
+	//"<i class='fas fa-pencil-alt'></i>"
+	document.getElementById(id).innerHTML = courseCode.value+"<br>"+location.value+"<br>"
+	+startOptions[startIndex].value+" - "+endOptions[endIndex+1].value;
 
 
 
