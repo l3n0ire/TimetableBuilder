@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Timetable Builder</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+  	.timetext{
+  		color: black;
+  	}
+  	td{
+  		color:white;
+  	}
+  	body{
+  		color:white;
+  	}
+  </style>
+</head>
+<body onresize="resize()">
+		<nav class="navbar navbar-expand-md bg-primary navbar-dark static-top" style=>
+	<!--Brand/Logo-->
+		<a class="navbar-brand" href="#" >
+			<img class="img-fluid" src="uoft.png" style="width: 40px; padding-right: 20px">
+		Timetable Builder</a>
+
+	<!--Navbar Collapse-->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		<!--Hamburger Icon-->
+    		<span class="navbar-toggler-icon"></span>
+ 		</button>
+
+	<!-- div element containing all the links-->
+  		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+  		<!--
+  			Links
+  		<ul class="navbar-nav">
+    		<li class="nav-item ">
+      			<a class="nav-link active" href="#">Active</a>
+    		</li>
+    		<li class="nav-item">
+      			<a class="nav-link" href="#">Link</a>
+    		</li>
+    		<li class="nav-item">
+      			<a class="nav-link" href="#">Link</a>
+    		</li>
+    		<li class="nav-item">
+      			<a class="nav-link disabled" href="#">Disabled</a>
+    		</li>
+  		</ul>-->
+
+  		<!-- Navbar text-->
+  			<span class="navbar-text">
+    			Some text
+  			</span>
+
+	</div>
+	</nav>
+<div class="row">
+	<div class="col-2 bg-dark" id="addCourse">
+		<div class="container-fluid" style="padding-top:5%;">
+			<div class="form-group">
+	  			<label for="courseCode">Course Code</label>
+	  			<input type="text" class="form-control" id="courseCode">
+			</div>
+			<div class="form-group">
+	  			<label for="location">Location</label>
+	  			<input type="text" class="form-control" id="location">
+			</div>
+			<div class="form-group">
+			  <label for="sel1">Day of Week</label>
+			  <select class="form-control" id="day">
+			    <option>Monday</option>
+			    <option>Tuesday</option>
+			    <option>Wednesday</option>
+			    <option>Thursday</option>
+			    <option>Friday</option>
+			  </select>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="form-group">
+					  <label for="start">Start</label>
+					  <select class="form-control" id="start" onchange="setEnd(this.selectedIndex)">
+					    <option>8 AM</option>
+					    <option>9 AM</option>
+					    <option>10 AM</option>
+					    <option>11 AM</option>
+					    <option>12 PM</option>
+					    <option>1 PM</option>
+					    <option>2 PM</option>
+					    <option>3 PM</option>
+					    <option>4 PM</option>
+					    <option>5 PM</option>
+					    <option>6 PM</option>
+					    <option>7 PM</option>
+					    <option>8 PM</option>
+					    <option>9 PM</option>
+					  </select>
+					</div>
+				</div>
+
+				<div class="col">
+					<div class="form-group">
+					  <label for="end">End</label>
+					  <select class="form-control" id="end">
+					  	<option>8 AM</option>
+					    <option>9 AM</option>
+					    <option>10 AM</option>
+					    <option>11 AM</option>
+					    <option>12 PM</option>
+					    <option>1 PM</option>
+					    <option>2 PM</option>
+					    <option>3 PM</option>
+					    <option>4 PM</option>
+					    <option>5 PM</option>
+					    <option>6 PM</option>
+					    <option>7 PM</option>
+					    <option>8 PM</option>
+					    <option>9 PM</option>
+					  </select>
+					</div>
+				</div>
+			</div>
+
+			<button type="button" class="btn btn-primary" onclick="addCourse()"> Add Course</button>
+
+
+		</div>
+	</div>
+	<div class="col-10" style="padding-left:0px" id="timeTable">
+		<div class="table-responsive-md" >
+			<table class="table ">
+			<!-- thead-dark and thead-light -->
+	    	<thead class="thead-light">
+	      <tr>
+	        <th></th>
+	        <th>Monday</th>
+	        <th>Tuesday</th>
+	        <th>Wednesday</th>
+	        <th>Thursday</th>
+	        <th>Friday</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <td><span class="timetext">8:00 AM</span></td>
+	        <td id="00" class="bg-primary">MATA23H<br>L01 </td>
+	        <td id="10"> </td>
+	        <td id="20"> </td>
+	        <td id="30"> </td>
+	        <td id="40"> </td>
+	      </tr>      
+	      <tr>
+	        <td><span class="timetext">9:00 AM</span></td>
+	        <td id="01" class="bg-primary">AC112<br>8AM - 10AM</td>
+	        <td id="11"> </td>
+	        <td id="21"> </td>
+	        <td id="31"> </td>
+	        <td id="41"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">10:00 AM</span></td>
+	        <td id="02"><br><br> </td>
+	        <td id="12"> </td>
+	        <td id="22"> </td>
+	        <td id="32"> </td>
+	        <td id="42"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">11:00 AM</span></td>
+			<td id="03"><br><br> </td>
+	        <td id="13"> </td>
+	        <td id="23"> </td>
+	        <td id="33"> </td>
+	        <td id="43"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">12:00 PM</span></td>
+	        <td id="04"><br><br> </td>
+	        <td id="14"> </td>
+	        <td id="24"> </td>
+	        <td id="34"> </td>
+	        <td id="44"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">1:00 PM</span></td>
+	       	<td id="05"><br><br> </td>
+	        <td id="15"> </td>
+	        <td id="25"> </td>
+	        <td id="35"> </td>
+	        <td id="45"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">2:00 PM</span></td>
+	        <td id="06"><br><br> </td>
+	        <td id="16"> </td>
+	        <td id="26"> </td>
+	        <td id="36"> </td>
+	        <td id="46"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">3:00 PM</span></td>
+	        <td id="07"> <br><br></td>
+	        <td id="17"> </td>
+	        <td id="27"> </td>
+	        <td id="37"> </td>
+	        <td id="47"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">4:00 PM</span></td>
+	        <td id="08"><br><br> </td>
+	        <td id="18"> </td>
+	        <td id="28"> </td>
+	        <td id="38"> </td>
+	        <td id="48"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">5:00 PM</span></td>
+	        <td id="09"> <br><br></td>
+	        <td id="19"> </td>
+	        <td id="29"> </td>
+	        <td id="39"> </td>
+	        <td id="49"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">6:00 PM</span></td>
+	        <td id="010"> <br><br></td>
+	        <td id="110"> </td>
+	        <td id="210"> </td>
+	        <td id="310"> </td>
+	        <td id="410"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">7:00 PM</span></td>
+	        <td id="011"> <br><br></td>
+	        <td id="111"> </td>
+	        <td id="211"> </td>
+	        <td id="311"> </td>
+	        <td id="411"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">8:00 PM</span></td>
+	        <td id="012"> <br><br></td>
+	        <td id="112"> </td>
+	        <td id="212"> </td>
+	        <td id="312"> </td>
+	        <td id="412"> </td>
+	      </tr>
+	      <tr>
+	        <td><span class="timetext">9:00 PM</span></td>
+	        <td id="013"> <br><br></td>
+	        <td id="113"> </td>
+	        <td id="213"> </td>
+	        <td id="313"> </td>
+	        <td id="413"> </td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+
+</div>
+</div>
+
+<script type="text/javascript" src="TimeTable.js"></script>
+
+</body>
+</html>
