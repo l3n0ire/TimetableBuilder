@@ -136,10 +136,25 @@ function edit(button,isEdit2){
 
 	//alert(buttonId+"\n"+courseCode.innerHTML+"\n"+location1.innerHTML+"\n"+startEndTime.value);
 
+
+
+
+
+
+
+
+
+
 	startIndex=startEndTime.value.substring(0,1);
 	endIndex = startEndTime.value.substring(1,2);
 	dayIndex=buttonId.substring(0,1);
 	endIndex= endIndex-1;
+
+	document.getElementById("courseCode").value=courseCode.innerHTML;
+	document.getElementById("location").value=location1.innerHTML;
+	document.getElementById("day").selectedIndex=dayIndex;
+	document.getElementById("start").selectedIndex=startIndex;
+	document.getElementById("end").selectedIndex=endIndex+1;
 
 
 	
