@@ -134,22 +134,12 @@ function edit(button,isEdit2){
 	location1 = document.getElementById("lt"+buttonId);
 	startEndTime = document.getElementById("sett"+buttonId);
 
-	//alert(buttonId+"\n"+courseCode.innerHTML+"\n"+location1.innerHTML+"\n"+startEndTime.value);
-
-
-
-
-
-
-
-
-
-
 	startIndex=startEndTime.value.substring(0,1);
 	endIndex = startEndTime.value.substring(1,2);
 	dayIndex=buttonId.substring(0,1);
 	endIndex= endIndex-1;
 
+	// update text field and selections
 	document.getElementById("courseCode").value=courseCode.innerHTML;
 	document.getElementById("location").value=location1.innerHTML;
 	document.getElementById("day").selectedIndex=dayIndex;
