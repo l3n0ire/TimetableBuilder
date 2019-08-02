@@ -11,10 +11,10 @@ var location1="";
 
 var isEdit=false;
 
-/*(function(){
+(function(){
 	resize();
 
-})();*/
+})();
 
 // fix this later
 function resize(){
@@ -24,8 +24,8 @@ function resize(){
 	var timeTableWidth = timeTable.offsetWidth;
 	//alert(addCourseWidth);
 
-	var min = 180;
-	var max = 300;
+	var min = 120;
+	var max = 200;
 	
 	if(columnSize<2){
 		columnSize=2;
