@@ -13,6 +13,7 @@ var isEdit=false;
 
 (function(){
 	resize();
+	showPrint=true;
 
 })();
 
@@ -104,8 +105,8 @@ function addCourse(){
 	id=String(dayIndex)+String(startIndex);
 	
 
-	document.getElementById(id).innerHTML = "<span id='courseCodeText'></span>"+"<button type='button' id='temp' class=' btn fas fa-pencil-alt' data-toggle='modal' data-target='#editCourse' onclick='edit(this,true)' style='background-color:transparent;color:white;'></button>"
-	+"<br>"+"<span id='locationText'></span>"+ "<button type='button' id='temp2' class='btn fas fa-trash-alt' data-toggle='modal' data-target='#confirm' onclick='edit(this,false)' style='background-color:transparent;color:white;'></button>"+"<br>"+"<span id='startEndTimeText'></span>";
+	document.getElementById(id).innerHTML = "<span id='courseCodeText'></span>"+"<span style='float:right;'> <button type='button' id='temp' class=' btn fas fa-pencil-alt' data-toggle='modal' data-target='#editCourse' onclick='edit(this,true)' style='background-color:transparent;color:white;'></button><button type='button' id='temp2' class='btn fas fa-trash-alt' data-toggle='modal' data-target='#confirm' onclick='edit(this,false)' style='background-color:transparent;color:white;'></button></span>"
+	+"<br>"+"<span id='locationText'></span>"+"<br>"+"<span id='startEndTimeText'></span>";
 	document.getElementById("temp").id = String(dayIndex) + String(startIndex);
 	document.getElementById("temp2").id = String(dayIndex) + String(startIndex);
 
@@ -125,9 +126,17 @@ function addCourse(){
 
 
 }
+function addCourseText(){
+			document.getElementById("modalTitle").innerHTML="Add a Course";
+}
 
 function edit(button,isEdit2){
 	isEdit=isEdit2;
+
+	if(isEdit){
+		document.getElementById("modalTitle").innerHTML="Edit Course";
+	}
+
 
 	buttonId = button.id;
 	courseCode = document.getElementById("cct"+buttonId);
