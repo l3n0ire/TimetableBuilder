@@ -4,10 +4,12 @@ var colors =["bg-primary","bg-success","bg-danger","bg-warning","bg-info"];
 var colorIndex=0;
 
 var buttonId="";
-var startIndex="";
-var endIndex="";
-var courseCode="";
-var location1="";
+var startIndex=0;
+var endIndex=1;
+var courseCode=document.getElementById("courseCode").value;
+var location1=document.getElementById("location").value;
+var dayIndex=0;
+var formBody;
 
 var isEdit=false;
 
@@ -51,7 +53,45 @@ function resize(){
 }
 
 
+function isSame(){
+	//alert("this works");
+	var end2 =document.getElementById("end");
+	var endIndex2 = end2.selectedIndex;
 
+	
+	var day2 =document.getElementById("day");
+ 	var dayIndex2 = day2.selectedIndex;
+
+	var start2 =document.getElementById("start");
+	var startIndex2 = start2.selectedIndex;
+
+
+ 	var courseCode2 = document.getElementById("courseCode").value;
+	var location2 = document.getElementById("location").value;
+
+	if(endIndex2==endIndex && dayIndex2==dayIndex && startIndex2== startIndex && courseCode2==courseCode && location2==location1){
+		return true;
+	}
+	else{
+
+
+
+		return false;
+	}
+
+}
+
+function updateStuff(){
+	end =document.getElementById("end");
+	endIndex = end.selectedIndex;
+	
+	dayIndex = document.getElementById("day").selectedIndex;
+ 	 
+	startIndex =document.getElementById("start").selectedIndex;
+	
+ 	courseCode = document.getElementById("courseCode").value;
+	location1 = document.getElementById("location").value;
+}
 
 
 /*
@@ -67,16 +107,17 @@ value
 */
 function addCourse(){
 
-	if(isEdit){
-		removeCourse();
-		isEdit=false;
-	}
+	
+	if(!isSame()){
 
+		if(isEdit){
+		removeCourse();
+		}
 	end =document.getElementById("end");
 	endOptions =end.options;
 	
 	var day =document.getElementById("day");
-	var dayIndex = day.selectedIndex;
+ 	dayIndex = day.selectedIndex;
 	var dayOptions =day.options;
 
 	var start =document.getElementById("start");
@@ -85,8 +126,11 @@ function addCourse(){
 
 	endIndex = end.selectedIndex;
 
- 	courseCode = document.getElementById("courseCode");
-	location1 = document.getElementById("location");
+ 	courseCode = document.getElementById("courseCode").value;
+	location1 = document.getElementById("location").value;
+
+	
+
 
 
 	var id="";
@@ -111,23 +155,24 @@ function addCourse(){
 	document.getElementById("temp2").id = String(dayIndex) + String(startIndex);
 
 
-	document.getElementById("courseCodeText").innerHTML = courseCode.value;
+	document.getElementById("courseCodeText").innerHTML = courseCode;
 	document.getElementById("courseCodeText").id = "cct"+String(dayIndex) + String(startIndex);
 
-	document.getElementById("locationText").innerHTML = location1.value;
+	document.getElementById("locationText").innerHTML = location1;
 	document.getElementById("locationText").id = "lt"+String(dayIndex) + String(startIndex);
 
 	document.getElementById("startEndTimeText").innerHTML = startOptions[startIndex].value+" - "+endOptions[endIndex+1].value;
 	document.getElementById("startEndTimeText").value=String(startIndex)+String(endIndex+1);
 	document.getElementById("startEndTimeText").id = "sett"+String(dayIndex) + String(startIndex);
 
-
+}
 
 
 
 }
 function addCourseText(){
 			document.getElementById("modalTitle").innerHTML="Add a Course";
+			updateStuff();
 }
 
 function edit(button,isEdit2){
@@ -135,6 +180,10 @@ function edit(button,isEdit2){
 
 	if(isEdit){
 		document.getElementById("modalTitle").innerHTML="Edit Course";
+		formBody =document.getElementById("formBody");
+		isEdit=false;
+
+ 
 	}
 
 
@@ -154,6 +203,8 @@ function edit(button,isEdit2){
 	document.getElementById("day").selectedIndex=dayIndex;
 	document.getElementById("start").selectedIndex=startIndex;
 	document.getElementById("end").selectedIndex=endIndex+1;
+
+	updateStuff();
 
 
 	
