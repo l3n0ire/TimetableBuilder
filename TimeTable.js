@@ -6,8 +6,8 @@ var colorIndex=0;
 var buttonId="";
 var startIndex=0;
 var endIndex=1;
-var courseCode=document.getElementById("courseCode").value;
-var location1=document.getElementById("location").value;
+var courseCode=$("#courseCode").val();
+var location1=$("#location").val();
 var dayIndex=0;
 var formBody;
 
@@ -21,8 +21,8 @@ var isEdit=false;
 
 // fix this later
 function resize(){
-	var addCourse = document.getElementById("addCourse");
-	var timeTable = document.getElementById("timeTable");
+	var addCourse = $("#addCourse");
+	var timeTable = $("#timeTable");
 	var addCourseWidth= addCourse.offsetWidth;
 	var timeTableWidth = timeTable.offsetWidth;
 	//alert(addCourseWidth);
@@ -54,26 +54,22 @@ function resize(){
 
 
 function isSame(){
-	//alert("this works");
-	var end2 =document.getElementById("end");
-	var endIndex2 = end2.selectedIndex;
+	
+	var endIndex2 = $("#end").prop("selectedIndex");
 
 	
-	var day2 =document.getElementById("day");
- 	var dayIndex2 = day2.selectedIndex;
+ 	var dayIndex2 = $("#day").prop("selectedIndex");
 
-	var start2 =document.getElementById("start");
-	var startIndex2 = start2.selectedIndex;
+	var startIndex2 = $("#start").prop("selectedIndex");
 
+ 	var courseCode2 = $("#courseCode").val();
+	var location2 = $("#location").val();
 
- 	var courseCode2 = document.getElementById("courseCode").value;
-	var location2 = document.getElementById("location").value;
 
 	if(endIndex2==endIndex && dayIndex2==dayIndex && startIndex2== startIndex && courseCode2==courseCode && location2==location1){
 		return true;
 	}
 	else{
-
 
 
 		return false;
@@ -82,15 +78,15 @@ function isSame(){
 }
 
 function updateStuff(){
-	end =document.getElementById("end");
+	end = document.getElementById("end");
 	endIndex = end.selectedIndex;
 	
 	dayIndex = document.getElementById("day").selectedIndex;
  	 
 	startIndex =document.getElementById("start").selectedIndex;
 	
- 	courseCode = document.getElementById("courseCode").value;
-	location1 = document.getElementById("location").value;
+ 	courseCode = $("#courseCode").val();
+	location1 = $("#location").val();
 }
 
 
@@ -103,7 +99,7 @@ options
 options object has property
 text
 or you can use the property
-value
+val()
 */
 function addCourse(){
 
@@ -112,22 +108,24 @@ function addCourse(){
 
 		if(isEdit){
 		removeCourse();
+		colorIndex =  colorIndex - 1;
+
 		}
-	end =document.getElementById("end");
+	end = document.getElementById("end");
 	endOptions =end.options;
 	
-	var day =document.getElementById("day");
+	var day = document.getElementById("day");
  	dayIndex = day.selectedIndex;
 	var dayOptions =day.options;
 
-	var start =document.getElementById("start");
+	var start = document.getElementById("start");
 	startIndex = start.selectedIndex;
 	var startOptions =start.options;
 
 	endIndex = end.selectedIndex;
 
- 	courseCode = document.getElementById("courseCode").value;
-	location1 = document.getElementById("location").value;
+ 	courseCode = $("#courseCode").val();
+	location1 = $("#location").val();
 
 	
 
@@ -137,7 +135,7 @@ function addCourse(){
 	endIndex=endIndex-1;
 	for(var i=startIndex;i<=endIndex;i++){
 		id= String(dayIndex)+String(i);
-		document.getElementById(id).className=colors[colorIndex];
+		$("#"+id).addClass(colors[colorIndex]);
 		
 	}
 	//change color
@@ -149,77 +147,84 @@ function addCourse(){
 	id=String(dayIndex)+String(startIndex);
 	
 
-	document.getElementById(id).innerHTML = "<span id='courseCodeText'></span>"+"<span style='float:right;'> <button type='button' id='temp' class=' btn fas fa-pencil-alt' data-toggle='modal' data-target='#editCourse' onclick='edit(this,true)' style='background-color:transparent;color:white;'></button><button type='button' id='temp2' class='btn fas fa-trash-alt' data-toggle='modal' data-target='#confirm' onclick='edit(this,false)' style='background-color:transparent;color:white;'></button></span>"
-	+"<br>"+"<span id='locationText'></span>"+"<br>"+"<span id='startEndTimeText'></span>";
-	document.getElementById("temp").id = String(dayIndex) + String(startIndex);
-	document.getElementById("temp2").id = String(dayIndex) + String(startIndex);
+	$("#"+id).html("<span id='courseCodeText'></span>"+"<span style='float:right;'> <button type='button' id='temp' class=' btn fas fa-pencil-alt' data-toggle='modal' data-target='#editCourse' onclick='edit(this,true)' style='background-color:transparent;color:white;'></button><button type='button' id='temp2' class='btn fas fa-trash-alt' data-toggle='modal' data-target='#confirm' onclick='edit(this,false)' style='background-color:transparent;color:white;'></button></span>"
+	+"<br>"+"<span id='locationText'></span>"+"<br>"+"<span id='startEndTimeText'></span>");
+	$("#temp").attr("id", String(dayIndex) + String(startIndex));
+	$("#temp2").attr("id", String(dayIndex) + String(startIndex));
 
 
-	document.getElementById("courseCodeText").innerHTML = courseCode;
-	document.getElementById("courseCodeText").id = "cct"+String(dayIndex) + String(startIndex);
+	$("#courseCodeText").html(courseCode);
+	$("#courseCodeText").attr("id","cct"+String(dayIndex) + String(startIndex));
 
-	document.getElementById("locationText").innerHTML = location1;
-	document.getElementById("locationText").id = "lt"+String(dayIndex) + String(startIndex);
+	$("#locationText").html(location1);
+	$("#locationText").attr("id","lt"+String(dayIndex) + String(startIndex));
 
-	document.getElementById("startEndTimeText").innerHTML = startOptions[startIndex].value+" - "+endOptions[endIndex+1].value;
-	document.getElementById("startEndTimeText").value=String(startIndex)+String(endIndex+1);
-	document.getElementById("startEndTimeText").id = "sett"+String(dayIndex) + String(startIndex);
+	$("#startEndTimeText").html(startOptions[startIndex].value+" - "+endOptions[endIndex+1].value);
+	$("#startEndTimeText").val(String(startIndex)+String(endIndex+1));
+	$("#startEndTimeText").attr("id" , "sett"+String(dayIndex) + String(startIndex));
 
 }
+isEdit=false;
 
 
+}
+function resetForm(){
+
+	$("#start").prop("selectedIndex",0);
+	$("#end").prop("selectedIndex",1);
+	$("#day").prop("selectedIndex",0);
+	$("#courseCode").val("");
+	$("#location").val("");
 
 }
 function addCourseText(){
-			document.getElementById("modalTitle").innerHTML="Add a Course";
+			$("#modalTitle").html("Add a Course");
 			updateStuff();
+			resetForm();
+			isEdit=false;
 }
 
 function edit(button,isEdit2){
+
+	alert(endIndex);
 	isEdit=isEdit2;
 
 	if(isEdit){
-		document.getElementById("modalTitle").innerHTML="Edit Course";
-		formBody =document.getElementById("formBody");
-		isEdit=false;
+		$("#modalTitle").html("Edit Course");
+		formBody = $("#formBody");
 
  
 	}
 
 
 	buttonId = button.id;
-	courseCode = document.getElementById("cct"+buttonId);
-	location1 = document.getElementById("lt"+buttonId);
-	startEndTime = document.getElementById("sett"+buttonId);
+	courseCode = $("#cct"+buttonId);
+	location1 = $("#lt"+buttonId);
+	startEndTime = $("#sett"+buttonId);
 
-	startIndex=startEndTime.value.substring(0,1);
-	endIndex = startEndTime.value.substring(1,2);
+	startIndex=startEndTime.val().substring(0,1);
+	endIndex = startEndTime.val().substring(1,2);
 	dayIndex=buttonId.substring(0,1);
 	endIndex= endIndex-1;
 
 	// update text field and selections
-	document.getElementById("courseCode").value=courseCode.innerHTML;
-	document.getElementById("location").value=location1.innerHTML;
-	document.getElementById("day").selectedIndex=dayIndex;
-	document.getElementById("start").selectedIndex=startIndex;
-	document.getElementById("end").selectedIndex=endIndex+1;
+	$("#courseCode").val(courseCode.html());
+	$("#location").val(location1.html());
+	$("#day").prop("selectedIndex",dayIndex);
+	$("#start").prop("selectedIndex",startIndex);
+	$("#end").prop("selectedIndex",endIndex+1);
 
 	updateStuff();
-
-
-	
-
-
 }
 function removeCourse(){
 	// reset the colors of the cells
 	var id="";
 	for(var i=startIndex;i<=endIndex;i++){
 		id= String(dayIndex)+String(i);
-		document.getElementById(id).className="";
+		$("#"+id).removeClass();
 	}
 	// remove all elements from course block
-	document.getElementById(buttonId).innerHTML="<br><br>";
+	$("#"+buttonId).html("<br><br>");
 
 	isEdit=false;
 
@@ -231,10 +236,10 @@ function resetOptions(){
 }
 
 function setEnd(startIndex){
-	end =document.getElementById("end");
+	var end =document.getElementById("end");
+
 	endOptions =end.options;
 	resetOptions();
-	var end =document.getElementById("end");
 	var endIndex = end.selectedIndex;
 	for(var i=0;i<=startIndex;i++){
 		end.options[i].disabled=true;
