@@ -15,31 +15,32 @@ var isEdit=false;
 
 (function(){
 	resize();
-	showPrint=true;
 
 })();
 
 // fix this later
 function resize(){
-	var addCourse = $("#addCourse");
-	var timeTable = $("#timeTable");
-	var addCourseWidth= addCourse.offsetWidth;
-	var timeTableWidth = timeTable.offsetWidth;
+	var addCourseWidth = $("#addCourse").prop("offsetWidth");
+	var timeTableWidth = $("#timeTable").prop("offsetWidth");
 	//alert(addCourseWidth);
-
-	var min = 120;
+	var min = 100;
 	var max = 200;
 	
 	if(columnSize<2){
 		columnSize=2;
 	}
 	if(addCourseWidth<min){
+				//alert(addCourseWidth);
+				//alert(columnSize);
 		while(addCourseWidth<min && columnSize<5){
 
 		columnSize++;
-		addCourse.className="col-"+(columnSize)+" bg-dark";
-		timeTable.className="col-"+(12-columnSize);
-		addCourseWidth= addCourse.offsetWidth;
+		$("#addCourse").removeClass();
+		$("#addCourse").addClass("col-"+(columnSize)+" bg-dark");
+		$("#timeTable").removeClass();
+		$("#timeTable").addClass("col-"+(12-columnSize));
+		addCourseWidth= $("#addCourse").prop("offsetWidth");
+
 		}
 
 	}
@@ -47,8 +48,10 @@ function resize(){
 		columnSize--;
 	
 	}
-	addCourse.className="col-"+(columnSize)+" bg-dark";
-	timeTable.className="col-"+(12-columnSize);
+	$("#addCourse").removeClass();
+	$("#addCourse").addClass("col-"+(columnSize)+" bg-dark");
+	$("#timeTable").removeClass();
+	$("#timeTable").addClass("col-"+(12-columnSize));
 	
 }
 
@@ -186,7 +189,6 @@ function addCourseText(){
 
 function edit(button,isEdit2){
 
-	alert(endIndex);
 	isEdit=isEdit2;
 
 	if(isEdit){
