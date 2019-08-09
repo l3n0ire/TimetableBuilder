@@ -7,11 +7,15 @@
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   	<link rel="stylesheet" media="print" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  	<!-- 
+  	JQuery CDN 
+  	Put this before bootstrap.js since bootstrap depends on jquery
+  	-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  	<!-- JQuery CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style type="text/css">
   	.timetext{
   		color: black;
@@ -228,18 +232,21 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+            <form>
+
+
       <div class="modal-body" >
 
+
+
+
       				
-      				<div class="form-group">
 	  			<label for="courseCode">Course Code</label>
-	  			<input type="text" class="form-control" id="courseCode" placeholder="ex. MATA31H3 F">
-			</div>
-			<div class="form-group">
-	  			<label for="location">Location</label>
-	  			<input type="text" class="form-control" id="location" placeholder="ex. SW 309">
-			</div>
-			<div class="form-group">
+	  			<input type="text" class="form-control" id="courseCode" placeholder="ex. MATA31H3 F" required>
+	  				  			<label for="location">Location</label>
+	  			<input type="text" class="form-control" id="location" placeholder="ex. SW 309" required>
+	  			
+			
 			  <label for="day">Day of Week</label>
 			  <select class="form-control" id="day">
 			    <option>Monday</option>
@@ -248,10 +255,8 @@
 			    <option>Thursday</option>
 			    <option>Friday</option>
 			  </select>
-			</div>
 			<div class="row">
 				<div class="col">
-					<div class="form-group">
 					  <label for="start">Start</label>
 					  <select class="form-control" id="start" onchange="setEnd(this.selectedIndex)">
 					    <option>8 AM</option>
@@ -269,11 +274,9 @@
 					    <option>8 PM</option>
 					    <option>9 PM</option>
 					  </select>
-					</div>
 				</div>
 
 				<div class="col">
-					<div class="form-group">
 					  <label for="end">End</label>
 					  <select class="form-control" id="end">
 					  	<option disabled="true">8 AM</option>
@@ -291,18 +294,21 @@
 					    <option>8 PM</option>
 					    <option>9 PM</option>
 					  </select>
-					</div>
 				</div>
 			</div>
 
-			
-			
+
+
         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary" onclick="addCourse()" data-dismiss="modal">Save</button>      
+        		<button type="submit" class="btn btn-primary" >Save</button>    
+
 	</div>
+							</form>	
+
+
     </div>
   </div>
 </div>

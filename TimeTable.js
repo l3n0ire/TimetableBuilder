@@ -93,6 +93,14 @@ function updateStuff(){
 }
 
 
+
+$("form").on('submit', function (e) {
+	//stop form submission
+   e.preventDefault();
+   addCourse();
+   $("#editCourse").modal('hide');
+   
+});
 /*
 DOM options
 element properties
@@ -105,7 +113,7 @@ or you can use the property
 val()
 */
 function addCourse(){
-
+	
 	
 	if(!isSame()){
 
@@ -169,8 +177,10 @@ function addCourse(){
 }
 isEdit=false;
 
-
 }
+
+
+
 function resetForm(){
 
 	$("#start").prop("selectedIndex",0);
