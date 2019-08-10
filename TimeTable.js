@@ -154,68 +154,38 @@ function addCourse(){
 	
 	
 	if(!isSame()){
-
-		if(isEdit){
+	if(isEdit){
 		removeCourse();
 		colorIndex =  colorIndex - 1;
 
 		}
-
+		
 	if(!isConflict()){
-	end = document.getElementById("end");
-	endOptions =end.options;
+
+
 	
-	var day = document.getElementById("day");
- 	dayIndex = day.selectedIndex;
-	var dayOptions =day.options;
+ 	dayIndex = $("#day").prop("selectedIndex");
 
-	var start = document.getElementById("start");
-	startIndex = start.selectedIndex;
-	var startOptions =start.options;
+	startIndex = $("#start").prop("selectedIndex");
 
-	endIndex = end.selectedIndex;
+	endIndex = $("#end").prop("selectedIndex");
 
  	courseCode = $("#courseCode").val();
 	location1 = $("#location").val();
 
+	antiRemoveCourse();
+
 	
 
 
 
-	var id="";
-	endIndex=endIndex-1;
-	for(var i=startIndex;i<=endIndex;i++){
-		id= String(dayIndex)+String(i);
-		$("#"+id).addClass(colors[colorIndex]);
-		
-	}
-	//change color
-	if(colorIndex<colors.length-1)
-			colorIndex=colorIndex+1;
-		else
-			colorIndex=0;
-
-	id=String(dayIndex)+String(startIndex);
 	
-
-	$("#"+id).html("<span id='courseCodeText'></span>"+"<span style='float:right;'> <button type='button' id='temp' class=' btn fas fa-pencil-alt' data-toggle='modal' data-target='#editCourse' onclick='edit(this,true)' style='background-color:transparent;color:white;'></button><button type='button' id='temp2' class='btn fas fa-trash-alt' data-toggle='modal' data-target='#confirm' onclick='edit(this,false)' style='background-color:transparent;color:white;'></button></span>"
-	+"<br>"+"<span id='locationText'></span>"+"<br>"+"<span id='startEndTimeText'></span>");
-	$("#temp").attr("id", String(dayIndex) + String(startIndex));
-	$("#temp2").attr("id", String(dayIndex) + String(startIndex));
-
-
-	$("#courseCodeText").html(courseCode);
-	$("#courseCodeText").attr("id","cct"+String(dayIndex) + String(startIndex));
-
-	$("#locationText").html(location1);
-	$("#locationText").attr("id","lt"+String(dayIndex) + String(startIndex));
-
-	$("#startEndTimeText").html(startOptions[startIndex].value+" - "+endOptions[endIndex+1].value);
-	$("#startEndTimeText").val(String(startIndex)+String(endIndex+1));
-	$("#startEndTimeText").attr("id" , "sett"+String(dayIndex) + String(startIndex));
 }
 else if( isConflict()){
 	$("#ttConflict").modal("show");
+	if(isEdit){
+		antiRemoveCourse();
+	}
 }
 
 }
@@ -283,10 +253,56 @@ function removeCourse(){
 	// remove all elements from course block
 	$("#"+buttonId).html("<br><br>");
 
-	isEdit=false;
+	//isEdit=false;
 
 
 }
+
+function antiRemoveCourse(){
+
+	end = document.getElementById("end");
+	endOptions =end.options;
+	
+	var day = document.getElementById("day");
+	var dayOptions =day.options;
+
+	var start = document.getElementById("start");
+	var startOptions =start.options;
+
+	var id="";
+	endIndex=endIndex-1;
+	for(var i=startIndex;i<=endIndex;i++){
+		id= String(dayIndex)+String(i);
+		$("#"+id).addClass(colors[colorIndex]);
+		
+	}
+	//change color
+	if(colorIndex<colors.length-1)
+			colorIndex=colorIndex+1;
+		else
+			colorIndex=0;
+
+	id=String(dayIndex)+String(startIndex);
+	
+
+	$("#"+id).html("<span id='courseCodeText'></span>"+"<span style='float:right;'> <button type='button' id='temp' class=' btn fas fa-pencil-alt' data-toggle='modal' data-target='#editCourse' onclick='edit(this,true)' style='background-color:transparent;color:white;'></button><button type='button' id='temp2' class='btn fas fa-trash-alt' data-toggle='modal' data-target='#confirm' onclick='edit(this,false)' style='background-color:transparent;color:white;'></button></span>"
+	+"<br>"+"<span id='locationText'></span>"+"<br>"+"<span id='startEndTimeText'></span>");
+	$("#temp").attr("id", String(dayIndex) + String(startIndex));
+	$("#temp2").attr("id", String(dayIndex) + String(startIndex));
+
+
+	$("#courseCodeText").html(courseCode);
+	$("#courseCodeText").attr("id","cct"+String(dayIndex) + String(startIndex));
+
+	$("#locationText").html(location1);
+	$("#locationText").attr("id","lt"+String(dayIndex) + String(startIndex));
+
+	$("#startEndTimeText").html(startOptions[startIndex].value+" - "+endOptions[endIndex+1].value);
+	$("#startEndTimeText").val(String(startIndex)+String(endIndex+1));
+	$("#startEndTimeText").attr("id" , "sett"+String(dayIndex) + String(startIndex));
+
+}
+
 function resetOptions(){
 	for(var i=0;i<endOptions.length;i++){
 		endOptions[i].disabled=false;
