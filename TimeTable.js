@@ -80,6 +80,28 @@ function isSame(){
 
 }
 
+function isConflict(){
+	var endIndex2 = $("#end").prop("selectedIndex");
+	endIndex2 = endIndex2 -1;
+
+	
+ 	var dayIndex2 = $("#day").prop("selectedIndex");
+
+	var startIndex2 = $("#start").prop("selectedIndex");
+
+	var conflict=false;
+
+	var i = startIndex2;
+
+	id= String(dayIndex2)+String(i);
+	while(i<=endIndex2 && $("#"+id).attr("class") == null){
+		id= String(dayIndex2)+String(i);
+		i++;	
+	}
+	conflict =  $("#"+id).attr("class") != null;
+	return conflict;
+}
+
 function updateStuff(){
 	end = document.getElementById("end");
 	endIndex = end.selectedIndex;
@@ -101,6 +123,8 @@ $("form").on('submit', function (e) {
    $("#editCourse").modal('hide');
    
 });
+
+
 /*
 DOM options
 element properties
@@ -115,7 +139,7 @@ val()
 function addCourse(){
 	
 	
-	if(!isSame()){
+	if(!isSame() && !isConflict()){
 
 		if(isEdit){
 		removeCourse();
@@ -175,6 +199,9 @@ function addCourse(){
 	$("#startEndTimeText").attr("id" , "sett"+String(dayIndex) + String(startIndex));
 
 }
+else if( isConflict()){
+	$("#ttConflict").modal("show");
+}
 isEdit=false;
 
 }
@@ -231,9 +258,10 @@ function edit(button,isEdit2){
 function removeCourse(){
 	// reset the colors of the cells
 	var id="";
-	for(var i=startIndex;i<=endIndex;i++){
+	var endIndex2 = endIndex-1;
+	for(var i=startIndex;i<=endIndex2;i++){
 		id= String(dayIndex)+String(i);
-		$("#"+id).removeClass();
+		$("#"+id).attr("class",null);
 	}
 	// remove all elements from course block
 	$("#"+buttonId).html("<br><br>");
