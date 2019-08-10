@@ -218,7 +218,7 @@ function resetForm(){
 
 }
 function addCourseText(){
-			$("#modalTitle").html("Add a Course");
+			$("#modalTitle").html("Add Course");
 			updateStuff();
 			resetForm();
 			isEdit=false;
@@ -286,4 +286,8 @@ function setEnd(startIndex){
 	}
 	end.selectedIndex=startIndex+1;
 
+}
+function printTT()
+{
+	window.print();
 }

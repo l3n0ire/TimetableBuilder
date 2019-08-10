@@ -4,8 +4,8 @@
 	<title>Timetable Builder</title>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  	<link rel="stylesheet" media="print" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  	<link rel="stylesheet" href="bootstrap-4.3.1/css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" media="print" href="bootstrap-4.3.1/css/bootstrap.min.css">
   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
   	<!-- 
   	JQuery CDN 
@@ -15,8 +15,13 @@
 
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  	<script src="bootstrap-4.3.1/js/bootstrap.min.js"></script>
 <style type="text/css">
+	@media print {
+body {-webkit-print-color-adjust: exact;}
+}
+
+
   	.timetext{
   		color: black;
   	}
@@ -73,7 +78,11 @@
 	<div class="col-2 bg-dark" id="addCourse">
 		<div class="container-fluid text-center py-5">
 			
-			<button type="button" class="btn btn-primary" onclick="addCourseText()" data-toggle="modal" data-target="#editCourse"> Add a Course</button>
+			<button type="button" class="btn btn-primary" onclick="addCourseText()" data-toggle="modal" data-target="#editCourse"> Add Course</button>
+			<br>
+			<br>	
+
+			<button type="button" class="btn btn-primary" onclick="printTT()"> <i class="fas fa-print"></i> Print </button>
 
 
 		</div>
