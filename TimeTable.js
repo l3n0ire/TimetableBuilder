@@ -9,7 +9,6 @@ var endIndex=1;
 var courseCode=$("#courseCode").val();
 var location1=$("#location").val();
 var dayIndex=0;
-var formBody;
 
 var isEdit=false;
 
@@ -104,15 +103,30 @@ function isConflict(){
 
 function updateStuff(){
 	end = document.getElementById("end");
-	endIndex = end.selectedIndex;
+	endIndex =  $("#end").prop("selectedIndex");
 	
-	dayIndex = document.getElementById("day").selectedIndex;
+	dayIndex = $("#day").prop("selectedIndex");
+
  	 
-	startIndex =document.getElementById("start").selectedIndex;
+	startIndex = $("#start").prop("selectedIndex");
+
 	
  	courseCode = $("#courseCode").val();
 	location1 = $("#location").val();
+
 }
+
+function antiUpdateStuff(){
+	end = document.getElementById("end");
+	startIndex=0;
+	endIndex=1;
+	courseCode="";
+	location1="";
+	dayIndex=0;
+
+
+}
+
 
 
 
@@ -139,13 +153,15 @@ val()
 function addCourse(){
 	
 	
-	if(!isSame() && !isConflict()){
+	if(!isSame()){
 
 		if(isEdit){
 		removeCourse();
 		colorIndex =  colorIndex - 1;
 
 		}
+
+	if(!isConflict()){
 	end = document.getElementById("end");
 	endOptions =end.options;
 	
@@ -197,11 +213,13 @@ function addCourse(){
 	$("#startEndTimeText").html(startOptions[startIndex].value+" - "+endOptions[endIndex+1].value);
 	$("#startEndTimeText").val(String(startIndex)+String(endIndex+1));
 	$("#startEndTimeText").attr("id" , "sett"+String(dayIndex) + String(startIndex));
-
 }
 else if( isConflict()){
 	$("#ttConflict").modal("show");
 }
+
+}
+
 isEdit=false;
 
 }
@@ -219,7 +237,7 @@ function resetForm(){
 }
 function addCourseText(){
 			$("#modalTitle").html("Add Course");
-			updateStuff();
+			antiUpdateStuff();
 			resetForm();
 			isEdit=false;
 }
@@ -230,7 +248,6 @@ function edit(button,isEdit2){
 
 	if(isEdit){
 		$("#modalTitle").html("Edit Course");
-		formBody = $("#formBody");
 
  
 	}
@@ -267,6 +284,7 @@ function removeCourse(){
 	$("#"+buttonId).html("<br><br>");
 
 	isEdit=false;
+
 
 }
 function resetOptions(){
