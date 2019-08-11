@@ -1,7 +1,7 @@
 var columnSize=2;
 
-var colors =["bg-primary","bg-success","bg-danger","bg-warning","bg-info"];
-var colorIndex=0;
+var colours =["bg-primary","bg-success","bg-danger","bg-warning","bg-info","darkOrange","blueViolet","hotPink","limeGreen","cornflowerBlue"];
+var colourIndex=0;
 
 var buttonId="";
 var startIndex=0;
@@ -9,6 +9,7 @@ var endIndex=1;
 var courseCode=$("#courseCode").val();
 var location1=$("#location").val();
 var dayIndex=0;
+var currentButton;
 
 var isEdit=false;
 
@@ -21,7 +22,6 @@ var isEdit=false;
 function resize(){
 	var addCourseWidth = $("#addCourse").prop("offsetWidth");
 	var timeTableWidth = $("#timeTable").prop("offsetWidth");
-	//alert(addCourseWidth);
 	var min = 100;
 	var max = 200;
 	
@@ -29,8 +29,7 @@ function resize(){
 		columnSize=2;
 	}
 	if(addCourseWidth<min){
-				//alert(addCourseWidth);
-				//alert(columnSize);
+		
 		while(addCourseWidth<min && columnSize<5){
 
 		columnSize++;
@@ -67,8 +66,11 @@ function isSame(){
  	var courseCode2 = $("#courseCode").val();
 	var location2 = $("#location").val();
 
+	var colourIndex2 = $("#colourPicker").prop("selectedIndex");
 
-	if(endIndex2==endIndex && dayIndex2==dayIndex && startIndex2== startIndex && courseCode2==courseCode && location2==location1){
+
+
+	if(endIndex2==endIndex && dayIndex2==dayIndex && startIndex2== startIndex && colourIndex2==colourIndex && courseCode2==courseCode && location2==location1){
 		return true;
 	}
 	else{
@@ -155,8 +157,8 @@ function addCourse(){
 	
 	if(!isSame()){
 	if(isEdit){
+
 		removeCourse();
-		colorIndex =  colorIndex - 1;
 
 		}
 		
@@ -172,6 +174,8 @@ function addCourse(){
 
  	courseCode = $("#courseCode").val();
 	location1 = $("#location").val();
+
+	colourIndex = $("#colourPicker").prop("selectedIndex");
 
 	antiRemoveCourse();
 
@@ -201,6 +205,7 @@ function resetForm(){
 	$("#start").prop("selectedIndex",0);
 	$("#end").prop("selectedIndex",1);
 	$("#day").prop("selectedIndex",0);
+	$("#colourPicker").prop("selectedIndex",colourIndex);
 	$("#courseCode").val("");
 	$("#location").val("");
 
@@ -232,6 +237,8 @@ function edit(button,isEdit2){
 	endIndex = startEndTime.val().substring(1,2);
 	dayIndex=buttonId.substring(0,1);
 	endIndex= endIndex-1;
+	colourIndex = parseInt($("#"+button.id).attr("colour"));
+
 
 	// update text field and selections
 	$("#courseCode").val(courseCode.html());
@@ -239,11 +246,12 @@ function edit(button,isEdit2){
 	$("#day").prop("selectedIndex",dayIndex);
 	$("#start").prop("selectedIndex",startIndex);
 	$("#end").prop("selectedIndex",endIndex+1);
+	$("#colourPicker").prop("selectedIndex",colourIndex);
 
 	updateStuff();
 }
 function removeCourse(){
-	// reset the colors of the cells
+	// reset the colours of the cells
 	var id="";
 	var endIndex2 = endIndex-1;
 	for(var i=startIndex;i<=endIndex2;i++){
@@ -273,20 +281,22 @@ function antiRemoveCourse(){
 	endIndex=endIndex-1;
 	for(var i=startIndex;i<=endIndex;i++){
 		id= String(dayIndex)+String(i);
-		$("#"+id).addClass(colors[colorIndex]);
+		$("#"+id).attr("colour",String(colourIndex));
+		$("#"+id).addClass(colours[colourIndex]);
 		
 	}
-	//change color
-	if(colorIndex<colors.length-1)
-			colorIndex=colorIndex+1;
+	//change colour
+	if(colourIndex<colours.length-1)
+			colourIndex=colourIndex+1;
 		else
-			colorIndex=0;
+			colourIndex=0;
 
 	id=String(dayIndex)+String(startIndex);
 	
 
 	$("#"+id).html("<span id='courseCodeText'></span>"+"<span style='float:right;'> <button type='button' id='temp' class=' btn fas fa-pencil-alt' data-toggle='modal' data-target='#editCourse' onclick='edit(this,true)' style='background-color:transparent;color:white;'></button><button type='button' id='temp2' class='btn fas fa-trash-alt' data-toggle='modal' data-target='#confirm' onclick='edit(this,false)' style='background-color:transparent;color:white;'></button></span>"
 	+"<br>"+"<span id='locationText'></span>"+"<br>"+"<span id='startEndTimeText'></span>");
+	
 	$("#temp").attr("id", String(dayIndex) + String(startIndex));
 	$("#temp2").attr("id", String(dayIndex) + String(startIndex));
 
