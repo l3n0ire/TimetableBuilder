@@ -18,9 +18,16 @@
   	<script src="bootstrap-4.3.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 	@media print {
-body {-webkit-print-color-adjust: exact;}
-}
+body {-webkit-print-color-adjust: exact;
+width:100%;
+height: 100%;}
 
+
+    .noprint
+    {
+    	visibility: hidden; 
+    }
+}
 
   	.timetext{
   		color: black;
@@ -64,8 +71,9 @@ body {-webkit-print-color-adjust: exact;}
 }
   </style>
 </head>
+
 <body onresize="resize()">
-		<nav class="navbar navbar-expand-md navbar-dark static-top" style="background-color: darkblue;">
+		<nav class="navbar navbar-expand-md navbar-dark static-top" style="background-color: darkblue ">
 	<!--Brand/Logo-->
 		<a class="navbar-brand" href="#" >
 			<img class="img-fluid px-2" src="uoft.png" style="width: 40px;">
@@ -89,10 +97,11 @@ body {-webkit-print-color-adjust: exact;}
   			
 	</div>
 	</nav>
+
+<div class="container-fluid">
 <div class="row">
-	<div class="col-2 bg-dark" id="addCourse">
-		<div class="container-fluid text-center py-5">
-			
+	<div class="col-2 bg-dark noprint" id="addCourse">
+		<div class="text-center py-5">
 			<button type="button" class="btn btn-primary" onclick="addCourseText()" data-toggle="modal" data-target="#editCourse"> Add Course</button>
 			<br>
 			<br>	
@@ -101,14 +110,12 @@ body {-webkit-print-color-adjust: exact;}
 
 			<br>
 			<br>	
-
 			<p> Version: 0.6 </p>
-
 		</div>
 	</div>
-	<div class="col-10" style="padding-left:0px" id="timeTable">
+	<div class="col-10" id="timeTable" style="padding: 0px">
 		<div class="table-responsive-md" >
-			<table class="table ">
+			<table class="table table-bordered ">
 			<!-- thead-dark and thead-light -->
 	    	<thead class="thead-light">
 	      <tr>
@@ -240,11 +247,11 @@ body {-webkit-print-color-adjust: exact;}
 </div>
 </div>
 
+</div>
 
 
-
-
-<footer id="sticky-footer" class="py-4 bg-secondary text-white-50">
+<!--Footer-->
+<footer id="sticky-footer" class="py-4 bg-secondary text-white-50 noprint">
     <div class="container text-center">
       <small>Copyright &copy; 2019 Colin Lin</small>
     </div>
