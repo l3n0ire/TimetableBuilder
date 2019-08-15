@@ -235,7 +235,10 @@ function edit(button,isEdit2){
 	startIndex=startEndTime.attr("startIndex");
 	endIndex = startEndTime.attr("endIndex");
 	dayIndex=buttonId.substring(0,1);
-	endIndex= endIndex-1;
+
+
+
+		endIndex= endIndex-1;
 	colourIndex = parseInt($("#"+button.id).attr("colour"));
 
 
@@ -247,7 +250,9 @@ function edit(button,isEdit2){
 	$("#end").attr("selectedIndex",endIndex);
 	$("#colourPicker").attr("selectedIndex",colourIndex);
 
-	updateStuff();
+	if(isEdit){
+		updateStuff();
+	}
 }
 function removeCourse(){
 	var id=String(dayIndex)+String(startIndex);
