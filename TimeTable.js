@@ -232,9 +232,12 @@ function edit(button,isEdit2){
 	location1 = $("#lt"+buttonId);
 	startEndTime = $("#sett"+buttonId);
 
-	startIndex=startEndTime.attr("startIndex");
-	endIndex = startEndTime.attr("endIndex");
-	dayIndex=buttonId.substring(0,1);
+
+	//these are STRINGS
+	startIndex=parseInt(startEndTime.attr("startIndex"));
+	endIndex = parseInt(startEndTime.attr("endIndex"));
+	dayIndex= parseInt(buttonId.substring(0,1));
+
 
 
 
