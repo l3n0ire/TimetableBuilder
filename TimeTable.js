@@ -207,7 +207,7 @@ function resetForm(){
 	$("#colourPicker").prop("selectedIndex",colourIndex);
 	$("#courseCode").val("");
 	$("#location").val("");
-
+	resetOptions();
 }
 function addCourseText(){
 			$("#modalTitle").html("Add Course");
@@ -250,17 +250,17 @@ function edit(button,isEdit2){
 	$("#end").attr("selectedIndex",endIndex);
 	$("#colourPicker").attr("selectedIndex",colourIndex);
 
-	if(isEdit){
-		updateStuff();
-	}
 }
 function removeCourse(){
 	var id=String(dayIndex)+String(startIndex);
 	$("#"+id).attr("class",null);
 	$("#"+id).attr("rowspan",1);
 	$("#"+id).html("<br><br>");
+	var counter=0;
 
-	for(var i = startIndex+1;i<endIndex;i++){
+	//alert(parseInt(startIndex)+1+"\n"+parseInt(endIndex));
+	for(var i = parseInt(startIndex)+1;i<=parseInt(endIndex);i++){
+
 		var dayIndex2=dayIndex;
 		if(dayIndex>0)
 			dayIndex2 = dayIndex -1;
@@ -280,10 +280,9 @@ function removeCourse(){
 			
 		$("#temptd").html("<br><br>");
 		$("#temptd").attr("id",String(dayIndex)+String(i));
-	}	
 	}
-
-	
+	}
+//alert(counter);
 
 
 
@@ -350,7 +349,10 @@ function antiRemoveCourse(){
 }
 
 function resetOptions(){
-	for(var i=0;i<endOptions.length;i++){
+	var end =document.getElementById("end");
+	endOptions =end.options;
+
+	for(var i=1;i<endOptions.length;i++){
 		endOptions[i].disabled=false;
 	}
 }
