@@ -82,7 +82,6 @@ function isSame(){
 
 function isConflict(){
 	var endIndex2 = $("#end").prop("selectedIndex");
-	endIndex2 = endIndex2 -1;
 
 	
  	var dayIndex2 = $("#day").prop("selectedIndex");
@@ -94,11 +93,52 @@ function isConflict(){
 	var i = startIndex2;
 
 	id= String(dayIndex2)+String(i);
-	while(i<=endIndex2 && $("#"+id).attr("class") == null){
+	if(dayIndex2==dayIndex){
+
+		if(startIndex2>=startIndex && endIndex2<=endIndex && endIndex2>startIndex){
+			conflict=false;
+		}
+		else{
+
+			
+			if(startIndex2<startIndex){
+				i=startIndex-1;
+				id= String(dayIndex2)+String(i);
+
+
+				while(i>startIndex2 && $("#"+id).attr("class") == null && $("#"+id).length>0 ){
+					id= String(dayIndex2)+String(i);
+					i--;	
+				}
+				conflict =  $("#"+id).attr("class") != null;
+
+			}
+			
+			if(!conflict){
+
+
+				i=endIndex;
+				id= String(dayIndex2)+String(i);
+
+				while(i<=endIndex2-1 && $("#"+id).attr("class") == null && $("#"+id).length>0 ){
+					id= String(dayIndex2)+String(i);
+					i++;	
+				}
+				conflict =  $("#"+id).attr("class") != null;
+			}
+
+		}
+
+	}
+	else{
+	while(i<=endIndex2 && $("#"+id).attr("class") == null && $("#"+id).length>0 ){
 		id= String(dayIndex2)+String(i);
 		i++;	
 	}
 	conflict =  $("#"+id).attr("class") != null;
+}
+	
+
 	return conflict;
 }
 
@@ -155,14 +195,14 @@ function addCourse(){
 	
 	
 	if(!isSame()){
-	if(isEdit){
-
-		removeCourse();
-
-		}
+	
 		
 	if(!isConflict()){
+		if(isEdit){
 
+			removeCourse();
+
+		}
 
 	
  	dayIndex = $("#day").prop("selectedIndex");
@@ -234,24 +274,26 @@ function edit(button,isEdit2){
 
 
 	//these are STRINGS
-	startIndex=parseInt(startEndTime.attr("startIndex"));
-	endIndex = parseInt(startEndTime.attr("endIndex"));
-	dayIndex= parseInt(buttonId.substring(0,1));
+	startIndex=startEndTime.attr("startIndex");
+	endIndex = startEndTime.attr("endIndex");
+	dayIndex= buttonId.substring(0,1);
 
 
 
 
-		endIndex= endIndex-1;
+
 	colourIndex = parseInt($("#"+button.id).attr("colour"));
 
 
 	// update text field and selections
-	$("#courseCode").val(courseCode.html());
-	$("#location").val(location1.html());
-	$("#day").attr("selectedIndex",dayIndex);
-	$("#start").attr("selectedIndex",startIndex);
-	$("#end").attr("selectedIndex",endIndex);
-	$("#colourPicker").attr("selectedIndex",colourIndex);
+	$("#courseCode").val(courseCode.text());
+	$("#location").val(location1.text());
+	$("#day").prop("selectedIndex",dayIndex);
+	$("#start").prop("selectedIndex",startIndex);
+	$("#end").prop("selectedIndex",endIndex);
+	$("#colourPicker").prop("selectedIndex",colourIndex);
+
+	setEnd(startIndex,false);
 
 }
 function removeCourse(){
@@ -261,8 +303,7 @@ function removeCourse(){
 	$("#"+id).html("<br><br>");
 	var counter=0;
 
-	//alert(parseInt(startIndex)+1+"\n"+parseInt(endIndex));
-	for(var i = parseInt(startIndex)+1;i<=parseInt(endIndex);i++){
+	for(var i = parseInt(startIndex)+1;i<parseInt(endIndex);i++){
 
 		var dayIndex2=dayIndex;
 		if(dayIndex>0)
@@ -285,7 +326,7 @@ function removeCourse(){
 		$("#temptd").attr("id",String(dayIndex)+String(i));
 	}
 	}
-//alert(counter);
+
 
 
 
@@ -360,7 +401,7 @@ function resetOptions(){
 	}
 }
 
-function setEnd(startIndex){
+function setEnd(startIndex,isSet){
 	var end =document.getElementById("end");
 
 	endOptions =end.options;
@@ -369,7 +410,8 @@ function setEnd(startIndex){
 	for(var i=0;i<=startIndex;i++){
 		end.options[i].disabled=true;
 	}
-	end.selectedIndex=startIndex+1;
+	if(isSet)
+		end.selectedIndex=startIndex+1;
 
 }
 function printTT()
