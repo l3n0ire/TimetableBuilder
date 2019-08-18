@@ -93,7 +93,7 @@ function isConflict(){
 	var i = startIndex2;
 
 	id= String(dayIndex2)+String(i);
-	if(dayIndex2==dayIndex){
+	if(dayIndex2==dayIndex && isEdit){
 
 		if(startIndex2>=startIndex && endIndex2<=endIndex && endIndex2>startIndex){
 			conflict=false;
@@ -110,7 +110,7 @@ function isConflict(){
 					id= String(dayIndex2)+String(i);
 					i--;	
 				}
-				conflict =  $("#"+id).attr("class") != null;
+	conflict =  $("#"+id).length<=0 || $("#"+id).attr("class") != null;
 
 			}
 			
@@ -131,11 +131,13 @@ function isConflict(){
 
 	}
 	else{
-	while(i<=endIndex2 && $("#"+id).attr("class") == null && $("#"+id).length>0 ){
+		i = startIndex2;
+		id= String(dayIndex2)+String(i);
+	while(i<endIndex2 && $("#"+id).attr("class") == null && $("#"+id).length>0 ){
 		id= String(dayIndex2)+String(i);
 		i++;	
 	}
-	conflict =  $("#"+id).attr("class") != null;
+	conflict =  $("#"+id).length<=0 || $("#"+id).attr("class") != null;
 }
 	
 
