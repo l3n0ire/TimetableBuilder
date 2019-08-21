@@ -418,6 +418,21 @@ function setEnd(startIndex,isSet){
 }
 function printTT()
 {
-	//$("#addCourse").remove();
+	$('#addCourse').toggleClass('active');
 	window.print();
+	$('#addCourse').toggleClass('active');
+
+
 }
+
+$(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#addCourse').toggleClass('active');
+    });
+
+    $('#close').on('click', function () {
+        $('#addCourse').toggleClass('active');
+    });
+
+});
