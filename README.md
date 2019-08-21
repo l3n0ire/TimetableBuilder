@@ -15,9 +15,9 @@ Any modern web browser except Internet Explorer 9. Supported browsers include: C
 Changes made in each update and current issues 
 
 ```
-Current Version: 0.9 - Fixed most bugs with edit and application is stable
+Current Version: 1.0 - Collapsible Sidebar and cleaner print preview
 
-Upcoming Version - Remove sidebar from printed timetable
+Upcoming Version - Redesign Sidebar UI and more colours
 
 ```
 
